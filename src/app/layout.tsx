@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script"; // ✅ Fix for Bootstrap JS
 import "~/app/globals.css";
 import { Providers } from "~/app/providers";
 import { APP_NAME, APP_DESCRIPTION } from "~/lib/constants";
@@ -8,22 +9,22 @@ export const metadata: Metadata = {
   description:
     APP_DESCRIPTION || "Track your crypto portfolio inside Farcaster.",
 
-  // ✅ Browser tab + Apple devices
+  // ✅ Icons for browser tab + Apple devices
   icons: {
-    icon: "/favicon.ico", // standard favicon
+    icon: "/favicon.ico", // favicon in public/
     shortcut: "/favicon.ico",
     apple: "/AwokeCryptoLogo.png", // iOS homescreen icon
   },
 
-  // ✅ Social preview (Farcaster, Twitter, Discord, etc.)
+  // ✅ Open Graph (Farcaster, Discord, Facebook)
   openGraph: {
     title: "AwokeCrypto Token Tracker",
     description: "Track your crypto portfolio inside Farcaster.",
-    url: "https://awokecrypto.vercel.app", // change if different domain
+    url: "https://awokecrypto.vercel.app",
     siteName: "AwokeCrypto",
     images: [
       {
-        url: "/AwokeCryptoLogo.png", // 👈 use your public logo
+        url: "/AwokeCryptoLogo.png", // stored in public/
         width: 1200,
         height: 630,
         alt: "AwokeCrypto Token Tracker",
@@ -32,11 +33,12 @@ export const metadata: Metadata = {
     type: "website",
   },
 
+  // ✅ Twitter / X Card
   twitter: {
     card: "summary_large_image",
     title: "AwokeCrypto Token Tracker",
     description: "Track your crypto portfolio inside Farcaster.",
-    images: ["/AwokeCryptoLogo.png"], // 👈 social preview image
+    images: ["/AwokeCryptoLogo.png"],
   },
 };
 
@@ -54,14 +56,18 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
         />
       </head>
-      {/* 👇 Apply dark neon theme via globals.css */}
+      {/* 👇 Dark neon theme applied via globals.css */}
       <body className="miniapp miniapp-dark">
         <Providers>{children}</Providers>
 
-        {/* Bootstrap JS (optional, for dropdowns etc.) */}
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" />
+        {/* ✅ Correct way to load Bootstrap JS in Next.js */}
+        <Script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
 }
+
 
