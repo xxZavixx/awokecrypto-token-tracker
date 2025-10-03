@@ -6,8 +6,7 @@ import { APP_NAME, APP_DESCRIPTION } from "~/lib/constants";
 
 export const metadata: Metadata = {
   title: APP_NAME || "AwokeCrypto Token Tracker",
-  description:
-    APP_DESCRIPTION || "Track your crypto portfolio inside Farcaster.",
+  description: APP_DESCRIPTION || "Track your crypto portfolio inside Farcaster.",
 
   // ✅ Icons for browser tab + Apple devices
   icons: {
@@ -17,30 +16,32 @@ export const metadata: Metadata = {
   },
 
   // ✅ Open Graph (Farcaster, Discord, Facebook)
-openGraph: {
-  title: "AwokeCrypto Token Tracker",
-  description: "Track your crypto portfolio inside Farcaster.",
-  url: "https://awokecrypto-token-tracker.vercel.app",
-  siteName: "AwokeCrypto",
-  images: [
-    {
-      url: "https://awokecrypto-token-tracker.vercel.app/AwokeCryptoLogo.png", // 👈 absolute URL
-      width: 1200,
-      height: 630,
-      alt: "AwokeCrypto Token Tracker",
-    },
-  ],
-  type: "website",
-},
+  openGraph: {
+    title: "AwokeCrypto Token Tracker",
+    description: "Track your crypto portfolio inside Farcaster.",
+    url: "https://awokecrypto-token-tracker.vercel.app",
+    siteName: "AwokeCrypto",
+    images: [
+      {
+        url: "https://awokecrypto-token-tracker.vercel.app/AwokeCryptoLogo.png", // 👈 absolute URL
+        width: 1200,
+        height: 630,
+        alt: "AwokeCrypto Token Tracker",
+      },
+    ],
+    type: "website",
+  },
 
-// ✅ Twitter
-twitter: {
-  card: "summary_large_image",
-  title: "AwokeCrypto Token Tracker",
-  description: "Track your crypto portfolio inside Farcaster.",
-  images: ["https://awokecrypto-token-tracker.vercel.app/AwokeCryptoLogo.png"], // 👈 absolute URL
-},
-
+  // ✅ Twitter Card
+  twitter: {
+    card: "summary_large_image",
+    title: "AwokeCrypto Token Tracker",
+    description: "Track your crypto portfolio inside Farcaster.",
+    images: [
+      "https://awokecrypto-token-tracker.vercel.app/AwokeCryptoLogo.png", // 👈 absolute URL
+    ],
+  },
+};
 
 export default function RootLayout({
   children,
