@@ -17,30 +17,30 @@ export const metadata: Metadata = {
   },
 
   // ✅ Open Graph (Farcaster, Discord, Facebook)
-  openGraph: {
-    title: "AwokeCrypto Token Tracker",
-    description: "Track your crypto portfolio inside Farcaster.",
-    url: "https://awokecrypto.vercel.app",
-    siteName: "AwokeCrypto",
-    images: [
-      {
-        url: "/AwokeCryptoLogo.png", // stored in public/
-        width: 1200,
-        height: 630,
-        alt: "AwokeCrypto Token Tracker",
-      },
-    ],
-    type: "website",
-  },
+openGraph: {
+  title: "AwokeCrypto Token Tracker",
+  description: "Track your crypto portfolio inside Farcaster.",
+  url: "https://awokecrypto-token-tracker.vercel.app",
+  siteName: "AwokeCrypto",
+  images: [
+    {
+      url: "https://awokecrypto-token-tracker.vercel.app/AwokeCryptoLogo.png", // 👈 absolute URL
+      width: 1200,
+      height: 630,
+      alt: "AwokeCrypto Token Tracker",
+    },
+  ],
+  type: "website",
+},
 
-  // ✅ Twitter / X Card
-  twitter: {
-    card: "summary_large_image",
-    title: "AwokeCrypto Token Tracker",
-    description: "Track your crypto portfolio inside Farcaster.",
-    images: ["/AwokeCryptoLogo.png"],
-  },
-};
+// ✅ Twitter
+twitter: {
+  card: "summary_large_image",
+  title: "AwokeCrypto Token Tracker",
+  description: "Track your crypto portfolio inside Farcaster.",
+  images: ["https://awokecrypto-token-tracker.vercel.app/AwokeCryptoLogo.png"], // 👈 absolute URL
+},
+
 
 export default function RootLayout({
   children,
