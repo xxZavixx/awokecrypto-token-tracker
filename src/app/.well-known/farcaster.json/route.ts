@@ -1,18 +1,28 @@
-import { NextResponse } from "next/server";
-import { getFarcasterDomainManifest } from "~/lib/utils";
+import { NextResponse, type NextRequest } from 'next/server';
+import { getFarcasterDomainManifest } from '~/lib/utils';
 
-// Build the manifest with absolute URLs based on the request's origin
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
   try {
-    const { origin } = new URL(req.url); // <-- https://awokecrypto-token-tracker.vercel.app
-    const config = getFarcasterDomainManifest(origin);
-    return NextResponse.json(config);
-  } catch (error: any) {
-    console.error("Error generating Farcaster manifest:", error);
-    const message = error instanceof Error ? error.message : "Unknown error";
-    return NextResponse.json({ error: message }, { status: 500 });
+    // Use the deployed origin (e.g., https://awokecrypto-token-tracker.vercel.app)
+    const baseUrl = req.nextUrl.origin;
+
+    const manifest = await getFarcasterDomainManifest(baseUrl);
+
+    return NextResponse.json(manifest, {
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        // Cache a little to avoid hammering your app
+        'Cache-Control': 'public, max-age=300, s-maxage=300',
+      },
+    });
+  } catch (err: any) {
+    return NextResponse.json(
+      { error: err?.message ?? 'Failed to generate manifest' },
+      { status: 500 },
+    );
   }
 }
+
 
 
 
