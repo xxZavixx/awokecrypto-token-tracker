@@ -1,13 +1,19 @@
-import { NextResponse } from 'next/server';
-import { getFarcasterDomainManifest } from '~/lib/utils';
+import { NextResponse } from "next/server";
+import { getFarcasterDomainManifest } from "~/lib/utils";
 
-export async function GET() {
+// Build the manifest with absolute URLs based on the request's origin
+export async function GET(req: Request) {
   try {
-    const config = await getFarcasterDomainManifest();
+    const { origin } = new URL(req.url); // <-- https://awokecrypto-token-tracker.vercel.app
+    const config = getFarcasterDomainManifest(origin);
     return NextResponse.json(config);
-  } catch (error) {
-    console.error('Error generating metadata:', error);
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
-    return NextResponse.json({ error: errorMessage }, { status: 500 });
+  } catch (error: any) {
+    console.error("Error generating Farcaster manifest:", error);
+    const message = error instanceof Error ? error.message : "Unknown error";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
+
+
+
+
